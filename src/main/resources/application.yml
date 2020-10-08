@@ -1,0 +1,67 @@
+# ===============================
+# = SERVER
+# ===============================
+
+server:
+  port: 8083
+# ===============================
+# = DATA SOURCE
+# ===============================
+
+# Set here configurations for the database connection
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    # Username and password
+    username: root
+    password: Passw0rd
+    driverClassName: com.mysql.jdbc.Driver
+    hikari:
+      poolName: JPAQueryDemo
+      maximumPoolSize: 60
+      minimumIdle: 20
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+      idleTimeout: 30000
+      dataSourceProperties:
+        # opt for mysql
+        cachePrepStmts: true
+        useServerPrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+
+  # ===============================
+  # = JPA / HIBERNATE
+  # ===============================
+
+  # Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+  # stripped before adding them to the entity manager).
+
+  # Show or not log for each sql query
+  jpa:
+    show-sql: true
+
+    # Hibernate ddl auto (create, create-drop, update): with "update" the database
+    # schema will be automatically updated accordingly to java entities found in
+    # the project
+    hibernate:
+      ddl-auto: none
+      # Naming strategy
+      #naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    # Allows Hibernate to generate SQL optimized for a particular DBMS
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        order_inserts: true
+        jdbc:
+          batch_size: 10000
