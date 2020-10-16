@@ -7,6 +7,7 @@ import com.demo.jpaquerydemo.model.CustomerProfile;
 import com.demo.jpaquerydemo.model.Favorites;
 import com.demo.jpaquerydemo.model.Tag;
 import com.demo.jpaquerydemo.repository.CustomerProfileRepository;
+import com.demo.jpaquerydemo.repository.CustomerRepository;
 import com.demo.jpaquerydemo.service.CustomerProfileService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +31,9 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
 
     @Autowired
     private CustomerProfileRepository customerProfileRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
 
     @Override
@@ -80,5 +84,17 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
     @Override
     public Page<CustomerProfile> listByTagNameAndProfileName(TagNameEnum name, String profileName, Pageable pageable) {
         return customerProfileRepository.listByTagNameAndProfileName(name, profileName, pageable);
+    }
+
+    @Override
+    public void save(String name, int age, GenderEnum gender, String customerId) {
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        CustomerProfile customerProfile = CustomerProfile.builder()
+                .age(age)
+                .gender(gender)
+                .name(name)
+                .customer(customer)
+                .build();
+        customerProfileRepository.save(customerProfile);
     }
 }

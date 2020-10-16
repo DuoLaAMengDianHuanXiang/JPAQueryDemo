@@ -19,4 +19,7 @@ public interface CustomerService {
 
     List<CustomerDTO> listByRegisterDateBetween(Date registerDateStart, Date registerDateEnd);
 
+
+    List<CustomerDTO> listByRegisterDateBetween2(Date registerDateStart, Date registerDateEnd);
+
 }

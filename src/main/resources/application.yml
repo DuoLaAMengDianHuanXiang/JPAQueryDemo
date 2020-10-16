@@ -61,7 +61,7 @@ spring:
     # Allows Hibernate to generate SQL optimized for a particular DBMS
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: com.demo.jpaquerydemo.dialect.MySQL5DialectExpand
         order_inserts: true
         jdbc:
           batch_size: 10000

@@ -20,4 +20,6 @@ public interface CustomerProfileService {
     List<CustomerProfile> listByTagNameAndLessThenAgeAndFavoritesName(TagNameEnum name, Integer age, String favoritesName);
 
     Page<CustomerProfile> listByTagNameAndProfileName(TagNameEnum name, String profileName, Pageable pageable);
+
+    void save(String name, int age, GenderEnum gender, String customerId);
 }

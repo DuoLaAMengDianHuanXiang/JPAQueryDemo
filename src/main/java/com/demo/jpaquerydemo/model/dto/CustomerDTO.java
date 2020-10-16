@@ -16,4 +16,11 @@ public class CustomerDTO {
     private String id;
 
     private String registerDate;
+
+    private Long count;
+
+    public CustomerDTO(String id, Long count){
+        this.id = id;
+        this.count = count;
+    }
 }
